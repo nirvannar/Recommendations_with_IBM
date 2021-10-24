@@ -1,5 +1,5 @@
 # Recommendations_with_IBM
-Project 3 for Data Science Nanodegree
+Project 2 for Data Scientist Nanodegree
 # Table of Contents
 
 * [Installation](#Installation)
@@ -10,7 +10,7 @@ Project 3 for Data Science Nanodegree
 
 
 ## Installation <a name="Installation"></a>
-The code should run with no issues using Python versions 3.8.8 using Jupyter Notebook server version 6.3.0.  Numpy, Pandas, matplotlib.pyplot, math, seaborn, wordcount, Datapane and Folium libraries were used.  A datapane account must be created and then the API token created and viewed at https://datapane.com/settings/  
+The code should run with no issues using Python versions 3.8.8 using Jupyter Notebook server version 6.3.0.  Numpy, Pandas, matplotlib.pyplot, math, seaborn, wordcount,  
 
 Datapane must then be installed as below
 
@@ -19,45 +19,45 @@ pip install -U datapane
 ```
 
 ## Project Motivation <a name="Project-Motivation"></a>
-For this project, I was interestested in using the characteristcs of Holocene volcanoes for the purpose of Volcano tourism.  A data science approach was taken using the CRISP-DM process.  A combination of the characteristics and the tourists location and base and appetite for distance travel will allow the traveller to use a combination of analyses to pick the locations for leisure travel purposes.  
+For this project I will analyze the interactions that users have with articles on the IBM Watson Studio platform, and make recommendations to them about new articles I think they will like.   
 
 **_Business Problem Understanding_**
  
-**_Question 1_** *How can I identify potential travel destinations for enthusiasts of volcano tourism?*  
-**_Question 2_** *How can I customise the travel destination for those tourists with no travel restriction?*  
-**_Question 3_** *How can I find the closest volcano and the closest most recently active volcanic island tour for tourists from South Africa?*  
+ 
+Your project will be divided into the following tasks
 
+**I. Exploratory Data Analysis**
+
+Before making recommendations of any kind, you will need to explore the data you are working with for the project. Dive in to see what you can find. There are some basic, required questions to be answered about the data you are working with throughout the rest of the notebook. Use this space to explore, before you dive into the details of your recommendation system in the later sections.
+
+**II. Rank Based Recommendations**
+
+To get started in building recommendations, you will first find the most popular articles simply based on the most interactions. Since there are no ratings for any of the articles, it is easy to assume the articles with the most interactions are the most popular. These are then the articles we might recommend to new users (or anyone depending on what we know about them).
+
+**III. User-User Based Collaborative Filtering**
+
+In order to build better recommendations for the users of IBM's platform, we could look at users that are similar in terms of the items they have interacted with. These items could then be recommended to the similar users. This would be a step in the right direction towards more personal recommendations for the users. You will implement this next.
+
+**IV. Content Based Recommendations (EXTRA - NOT REQUIRED)**
+
+Given the amount of content available for each article, there are a number of different ways in which someone might choose to implement a content based recommendations system. Using your NLP skills, you might come up with some extremely creative ways to develop a content based recommendation system. You are encouraged to complete a content based recommendation system, but not required to do so to complete this project.
+
+**V. Matrix Factorization**
+
+Finally, you will complete a machine learning approach to building recommendations. Using the user-item interactions, you will build out a matrix decomposition. Using your decomposition, you will get an idea of how well you can predict new articles an individual might interact with (spoiler alert - it isn't great). You will finally discuss which methods you might use moving forward, and how you might test how well your recommendations are working for engaging users.
 
 
 ## File Descriptions and Analyses <a name="File-Descriptions-and-Analyses"></a>
 **_Data Understanding_**
-I was interestested in using Smithsonian Institution data from the Global Volcanism Program entitled Volcanoes of the World 4.10.1, downloaded on 24 Jul 2021 at 11:16 AM	as a .csv file to use characteristcs of Holocene volcanoes for the purpose of Volcano tourism. 
 
-The .csv file was analysed using a Jupyter Notebook.  There is one notebook available here to showcase work related to the above questions. The notebook is exploratory in searching through the data pertaining to the questions showcased by the notebook title. Markdown cells were used to assist in walking through the thought process for individual steps.  The notebook had 1398 rows of data and 4 columns of quantitative variables.  The total columns were 14 namely Volcano Number,	Volcano Name,	Country,	Primary Volcano Type,	Activity Evidence,	Last Known Eruption,	Region,	Subregion,	Latitude,	Longitude, 	Elevation (m),	Dominant Rock Type and	Tectonic Setting.   The columns of data "Dominant Rock Type" and "Tectonic Setting" contained blanks.  However these 2 columns were not used to obtain results and are excluded from any analysis.  
-
-Pandas DataFrame.hist was used to see the distribution / shape of the data for the quantitative variables.  The only variables were volcano number, latitude, longitude and Elevation (m) that were analysed.  Elevation (m) was normally distributed while latitude had 2 peaks and the longitude and volcano numbers were spread out.
-
-Seaborn pairplot and heatmap were used to check for any correlations between variables.  No strong correlations existed.  Thus no machine mearning models were considered in the analyses.  
 
 **_Data Preparation_**  
-The Country column was manipulated to show the name of the country before the "-" so as to count with the first country mentioned before the hyphen.
-The Primary Volcano Types which was renamed to Types was manipulated to reflect singular instead of plural words using a combination of the string manipulation techniques of replace() and strip().  Some of the remaining columns names were simplified to enable ease of coding.The columns of data "Dominant Rock Type" and "Tectonic Setting" were not used to obtain results and are excluded from any analysis.
+
 
 
 ## Results <a name="Results"></a>
 
-**Question 1** *How can I identify potential travel destinations for enthusiasts of volcano tourism?*  
 
-*This was answered firstly via using Folium and datapane with volcano markers to the world map.*  
-A person could chose to refine the travel destination by the most common type of volcano and/or by the country with the most volcanoes and/or Region and/or Elevation above sea level.  To summarise a traveler could choose one or a combination of the Holocene characteristics, or choose the highest or lowest elevation, or simply look at the interactive map to target where to start their travel search.  
-
-**Question 2** *How can I customise the travel destination for those tourists with no travel restriction?*  
-Travel restrictions exist in terms of visa regulations, COVID_19 entry requirements and lockdown levels, availability of international and regional flights, etc. Question 2 was answered by using the results of Question 1 as inputs. A combination of characteristics indicates that Chile had the highest volcanoes in terms of Elevation and 69% (66 of 96) were stratovolcanoes (which is the most common primary type of volcano). In addition Chile is in the Region with the must volcanoes which is South America, and is number 5 on the list of countries with the most volcanoes. In addition *San Pedro de Atacama* is one of the most visited places in Chile's *Atacama* desert.
-The Haversine formula was then used to calculate the distances between 2 sets of latitude and longitude points. This distance was calculated from San Pedro de Atacama, to other volcanic locations via a for loop. The closest distance was then calculated using dataframe.min(). This resulted in the selection of *Licancabur*. The closest volcano which had erupted in the last 5 years (2017) was *Lascar* which is at an elevation of 5592m and 70.2km away from San Pedro de Atacama.
-
-**Question 3** *How can I find the closest volcano and the closest most recently active volcanic island tour for tourists from South Africa?*  
-The interactive map shows the closest volcanos in the area around South Africa. The Haversine formula was used to calculate the distances from OR Tambo International Airport (in Johannesburg), to other volcanic locations via a for loop. The closest volcano to Johannesburg is the Stratovolcano *Kyejo* in Tanzania.  
-The closest active volcanic island was found using a combination of characteristics including elevation from sea level (0m) to 3000m, eruption in 2021, located in the Indian Ocean and within 3000km away from Johannesburg resulted in selecting the shield volcano *Piton de la Fournaise*.
 
 ```python
 # )
@@ -67,5 +67,5 @@ The closest active volcanic island was found using a combination of characterist
 [A Medium blog](https://medium.com/@nirvannsramp/intrepid-explosive-voyages-77f23e47e24e?source=friends_link&sk=b97c94187c9f435b0b955aa12acc408d) was created using the results. 
 
 ## Licensing, Authors, and Acknowledgements<a name="Licensing,-Authors,-and-Acknowledgements"></a>
-The data was downloaded from the Smithsonian Institution Global Volcanism Program. Stack Overflow, Kaggle, Medium and Github were consulted for syntax references.  
-The Volcano marker used in the Folium map was created by Joris Hoogendoorn from the Noun Project
+The data was available from the IBM Watson. Stack Overflow, Kaggle, Medium and Github, codegrepper, geeksforgeeks were consulted for syntax references.  
+
