@@ -1,5 +1,5 @@
 # Recommendations_with_IBM
-Project 2 for Data Scientist Nanodegree
+Project 3 for Data Scientist Nanodegree
 # Table of Contents
 
 * [Installation](#Installation)
@@ -67,5 +67,5 @@ Finally, you will complete a machine learning approach to building recommendatio
 [A Medium blog](https://medium.com/@nirvannsramp/intrepid-explosive-voyages-77f23e47e24e?source=friends_link&sk=b97c94187c9f435b0b955aa12acc408d) was created using the results. 
 
 ## Licensing, Authors, and Acknowledgements<a name="Licensing,-Authors,-and-Acknowledgements"></a>
-The data was available from the IBM Watson. Stack Overflow, Kaggle, Medium and Github, codegrepper, geeksforgeeks were consulted for syntax references.  
+The data was available from the (Towards data science)[https://towardsdatascience.com/5-pandas-group-by-tricks-you-should-know-in-python-f53246c92c94]. [https://www.geeksforgeeks.org/get-n-largest-values-from-a-particular-column-in-pandas-dataframe/], https://note.nkmk.me/en/python-pandas-duplicated-drop-duplicates/
 
